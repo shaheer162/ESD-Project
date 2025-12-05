@@ -1,0 +1,1130 @@
+{
+	"info": {
+		"_postman_id": "sports-management-system-2024",
+		"name": "Sports Management System API",
+		"description": "Complete API collection for Sports Management System\n\nBase URL: http://localhost:8080/api/v1\n\nNote: Admin endpoints require 'X-Admin-Username' header",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Admin Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin1\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/register",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "register"]
+						}
+					}
+				},
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin1\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/login",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "login"]
+						}
+					}
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/admins",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "admins"]
+						}
+					}
+				},
+				{
+					"name": "Team Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"manchesterunited\",\n  \"email\": \"team@example.com\",\n  \"name\": \"Manchester United\",\n  \"division\": { \"id\": 1 },\n  \"city\": { \"id\": 1 },\n  \"stadium\": { \"id\": 1 }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/team/register",
+							"host": ["{{base_url}}"],
+							"path": ["team", "register"]
+						}
+					}
+				},
+				{
+					"name": "Team Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"manchesterunited\",\n  \"password\": \"manchesterunited\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/team/login",
+							"host": ["{{base_url}}"],
+							"path": ["team", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Matches",
+			"item": [
+				{
+					"name": "Get All Matches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/match",
+							"host": ["{{base_url}}"],
+							"path": ["match"]
+						}
+					}
+				},
+				{
+					"name": "Get Match by UUID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/match/:uuid",
+							"host": ["{{base_url}}"],
+							"path": ["match", ":uuid"],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "550e8400-e29b-41d4-a716-446655440000"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Match (Admin Only)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"homeTeam\": { \"id\": 1 },\n  \"awayTeam\": { \"id\": 2 },\n  \"date\": \"2024-12-25\",\n  \"time\": \"15:00:00\",\n  \"homeGoals\": 2,\n  \"awayGoals\": 1,\n  \"spectators\": 0,\n  \"ticketPrice\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/match",
+							"host": ["{{base_url}}"],
+							"path": ["match"]
+						}
+					}
+				},
+				{
+					"name": "Update Match (Admin Only)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"homeTeam\": { \"id\": 1 },\n  \"awayTeam\": { \"id\": 2 },\n  \"date\": \"2024-12-25\",\n  \"time\": \"15:00:00\",\n  \"homeGoals\": 3,\n  \"awayGoals\": 1,\n  \"spectators\": 0,\n  \"ticketPrice\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/match/:uuid",
+							"host": ["{{base_url}}"],
+							"path": ["match", ":uuid"],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "550e8400-e29b-41d4-a716-446655440000"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Match (Admin Only)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/match/:uuid",
+							"host": ["{{base_url}}"],
+							"path": ["match", ":uuid"],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "550e8400-e29b-41d4-a716-446655440000"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "Get Players by Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team/:teamId/players",
+							"host": ["{{base_url}}"],
+							"path": ["team", ":teamId", "players"],
+							"variable": [
+								{
+									"key": "teamId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Player by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/player/:id",
+							"host": ["{{base_url}}"],
+							"path": ["player", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Player History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/player/:id/history",
+							"host": ["{{base_url}}"],
+							"path": ["player", ":id", "history"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Player (Admin Only)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"position\": \"Forward\",\n  \"jerseyNumber\": 10,\n  \"team\": { \"id\": 1 }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/player",
+							"host": ["{{base_url}}"],
+							"path": ["player"]
+						}
+					}
+				},
+				{
+					"name": "Update Player (Admin Only)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe Updated\",\n  \"position\": \"Midfielder\",\n  \"jerseyNumber\": 10,\n  \"team\": { \"id\": 1 }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/player/:id",
+							"host": ["{{base_url}}"],
+							"path": ["player", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Player (Admin Only)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/player/:id",
+							"host": ["{{base_url}}"],
+							"path": ["player", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Player Statistics",
+			"item": [
+				{
+					"name": "Get Match Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/match/:matchUuid/stats",
+							"host": ["{{base_url}}"],
+							"path": ["match", ":matchUuid", "stats"],
+							"variable": [
+								{
+									"key": "matchUuid",
+									"value": "550e8400-e29b-41d4-a716-446655440000"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Player Stats for Match",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/match/:matchUuid/player/:playerId/stats",
+							"host": ["{{base_url}}"],
+							"path": ["match", ":matchUuid", "player", ":playerId", "stats"],
+							"variable": [
+								{
+									"key": "matchUuid",
+									"value": "550e8400-e29b-41d4-a716-446655440000"
+								},
+								{
+									"key": "playerId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Add Player Stats (Admin Only)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"goals\": 2,\n  \"assists\": 1,\n  \"passes\": 45\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/match/:matchUuid/player/:playerId/stats",
+							"host": ["{{base_url}}"],
+							"path": ["match", ":matchUuid", "player", ":playerId", "stats"],
+							"variable": [
+								{
+									"key": "matchUuid",
+									"value": "550e8400-e29b-41d4-a716-446655440000"
+								},
+								{
+									"key": "playerId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Player Stats (Admin Only)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Admin-Username",
+								"value": "{{admin_username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"goals\": 3,\n  \"assists\": 2,\n  \"passes\": 50\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/match/:matchUuid/player/:playerId/stats",
+							"host": ["{{base_url}}"],
+							"path": ["match", ":matchUuid", "player", ":playerId", "stats"],
+							"variable": [
+								{
+									"key": "matchUuid",
+									"value": "550e8400-e29b-41d4-a716-446655440000"
+								},
+								{
+									"key": "playerId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Get All Teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team",
+							"host": ["{{base_url}}"],
+							"path": ["team"]
+						}
+					}
+				},
+				{
+					"name": "Get Team by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team/:id",
+							"host": ["{{base_url}}"],
+							"path": ["team", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Teams by City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/teamByCity/:id",
+							"host": ["{{base_url}}"],
+							"path": ["teamByCity", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Team Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team/:id/dashboard",
+							"host": ["{{base_url}}"],
+							"path": ["team", ":id", "dashboard"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Team Match History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team/:id/history",
+							"host": ["{{base_url}}"],
+							"path": ["team", ":id", "history"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Team",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Team Name\",\n  \"division\": { \"id\": 1 },\n  \"city\": { \"id\": 1 },\n  \"stadium\": { \"id\": 1 }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/team/:id",
+							"host": ["{{base_url}}"],
+							"path": ["team", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Team",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team/:id",
+							"host": ["{{base_url}}"],
+							"path": ["team", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Get All League Standings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/statistics/standings/all",
+							"host": ["{{base_url}}"],
+							"path": ["statistics", "standings", "all"]
+						}
+					}
+				},
+				{
+					"name": "Get League Standings by Division",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/statistics/standings/division/:divisionId",
+							"host": ["{{base_url}}"],
+							"path": ["statistics", "standings", "division", ":divisionId"],
+							"variable": [
+								{
+									"key": "divisionId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Top Scorers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/statistics/top-scorers?limit=10",
+							"host": ["{{base_url}}"],
+							"path": ["statistics", "top-scorers"],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Top Assists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/statistics/top-assists?limit=10",
+							"host": ["{{base_url}}"],
+							"path": ["statistics", "top-assists"],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Team Performance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/statistics/team/:teamId/performance",
+							"host": ["{{base_url}}"],
+							"path": ["statistics", "team", ":teamId", "performance"],
+							"variable": [
+								{
+									"key": "teamId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Stadium Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/statistics/stadiums",
+							"host": ["{{base_url}}"],
+							"path": ["statistics", "stadiums"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Search & Filter",
+			"item": [
+				{
+					"name": "Search Teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/search/teams?q=manchester",
+							"host": ["{{base_url}}"],
+							"path": ["search", "teams"],
+							"query": [
+								{
+									"key": "q",
+									"value": "manchester"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/search/players?q=john",
+							"host": ["{{base_url}}"],
+							"path": ["search", "players"],
+							"query": [
+								{
+									"key": "q",
+									"value": "john"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Filter Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/search/players/filter?teamId=1&position=Forward&minJersey=1&maxJersey=99",
+							"host": ["{{base_url}}"],
+							"path": ["search", "players", "filter"],
+							"query": [
+								{
+									"key": "teamId",
+									"value": "1"
+								},
+								{
+									"key": "position",
+									"value": "Forward"
+								},
+								{
+									"key": "minJersey",
+									"value": "1"
+								},
+								{
+									"key": "maxJersey",
+									"value": "99"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Filter Matches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/search/matches/filter?divisionId=1&teamId=1&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{base_url}}"],
+							"path": ["search", "matches", "filter"],
+							"query": [
+								{
+									"key": "divisionId",
+									"value": "1"
+								},
+								{
+									"key": "teamId",
+									"value": "1"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Cities",
+			"item": [
+				{
+					"name": "Get All Cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/city",
+							"host": ["{{base_url}}"],
+							"path": ["city"]
+						}
+					}
+				},
+				{
+					"name": "Get City by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/city/:id",
+							"host": ["{{base_url}}"],
+							"path": ["city", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create City",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"New City\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/city",
+							"host": ["{{base_url}}"],
+							"path": ["city"]
+						}
+					}
+				},
+				{
+					"name": "Update City",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated City Name\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/city/:id",
+							"host": ["{{base_url}}"],
+							"path": ["city", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete City",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/city/:id",
+							"host": ["{{base_url}}"],
+							"path": ["city", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Stadiums",
+			"item": [
+				{
+					"name": "Get All Stadiums",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stadium",
+							"host": ["{{base_url}}"],
+							"path": ["stadium"]
+						}
+					}
+				},
+				{
+					"name": "Get Stadium by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stadium/:id",
+							"host": ["{{base_url}}"],
+							"path": ["stadium", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Stadium",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"New Stadium\",\n  \"capacity\": 50000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/stadium",
+							"host": ["{{base_url}}"],
+							"path": ["stadium"]
+						}
+					}
+				},
+				{
+					"name": "Update Stadium",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Stadium Name\",\n  \"capacity\": 60000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/stadium/:id",
+							"host": ["{{base_url}}"],
+							"path": ["stadium", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Stadium",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/stadium/:id",
+							"host": ["{{base_url}}"],
+							"path": ["stadium", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Divisions",
+			"item": [
+				{
+					"name": "Get All Divisions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/division",
+							"host": ["{{base_url}}"],
+							"path": ["division"]
+						}
+					}
+				},
+				{
+					"name": "Get Division by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/division/:id",
+							"host": ["{{base_url}}"],
+							"path": ["division", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Division",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"New Division\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/division",
+							"host": ["{{base_url}}"],
+							"path": ["division"]
+						}
+					}
+				},
+				{
+					"name": "Update Division",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Division Name\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/division/:id",
+							"host": ["{{base_url}}"],
+							"path": ["division", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Division",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/division/:id",
+							"host": ["{{base_url}}"],
+							"path": ["division", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "admin_username",
+			"value": "admin1",
+			"type": "string"
+		}
+	]
+}
+
